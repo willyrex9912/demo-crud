@@ -1,0 +1,12 @@
+version: '3'
+services:
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 399
+      POSTGRES_DB: demo-crud
+      TZ: America/Guatemala
+    ports:
+      - '5421:5432'
