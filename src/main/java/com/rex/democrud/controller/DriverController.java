@@ -3,6 +3,7 @@ package com.rex.democrud.controller;
 import com.rex.democrud.dto.DriverDto;
 import com.rex.democrud.dto.NewDriverDto;
 import com.rex.democrud.service.DriverService;
+import com.rex.democrud.service.exceptions.DriverNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,12 @@ public class DriverController {
                 .status(HttpStatus.OK)
                 .body(this.driverService.findAll())
         ;
+    }
+
+    @DeleteMapping("/{driverId}")
+    public ResponseEntity<Void> delete(@PathVariable("driverId") Long id) throws DriverNotFoundException {
+        this.driverService.deleteDriver(id);
+        return ResponseEntity.accepted().build();
     }
 
 }
