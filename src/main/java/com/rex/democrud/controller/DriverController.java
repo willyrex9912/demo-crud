@@ -2,6 +2,7 @@ package com.rex.democrud.controller;
 
 import com.rex.democrud.dto.DriverDto;
 import com.rex.democrud.dto.NewDriverDto;
+import com.rex.democrud.model.entities.drivers.Driver;
 import com.rex.democrud.service.DriverService;
 import com.rex.democrud.service.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,14 @@ public class DriverController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(this.driverService.createDriver(entity))
+        ;
+    }
+
+    @PutMapping("")
+    public ResponseEntity<DriverDto> update(@RequestBody Driver entity) throws NotFoundException {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.driverService.updateDriver(entity))
         ;
     }
 

@@ -1,6 +1,8 @@
 package com.rex.democrud.model.entities.drivers;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,9 +24,12 @@ public class Driver {
     @GeneratedValue(generator = "driverIdGenerator", strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @NotNull
+    @Size(max = 100)
     @Column(name = "name")
     private String name;
 
+    @NotNull
     @Column(name = "age")
     private Integer age;
 

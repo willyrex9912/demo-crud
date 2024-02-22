@@ -30,6 +30,16 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    public DriverDto updateDriver(Driver entity) throws NotFoundException {
+        var optionalEntity = this.driverRepository.findById(entity.getId());
+        if (optionalEntity.isEmpty()) throw new NotFoundException();
+        Driver databaseEntity = optionalEntity.get();
+        databaseEntity.setName(entity.getName());
+        databaseEntity.setAge(entity.getAge());
+        return new DriverDto(this.driverRepository.save(databaseEntity));
+    }
+
+    @Override
     public List<DriverDto> findAll() {
         return this.driverRepository.findAll()
                 .stream()
