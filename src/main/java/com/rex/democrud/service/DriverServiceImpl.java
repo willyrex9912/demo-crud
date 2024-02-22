@@ -4,6 +4,7 @@ import com.rex.democrud.dto.DriverDto;
 import com.rex.democrud.dto.NewDriverDto;
 import com.rex.democrud.model.entities.drivers.Driver;
 import com.rex.democrud.repositories.DriverRepository;
+import com.rex.democrud.service.exceptions.DuplicatedException;
 import com.rex.democrud.service.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,11 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public DriverDto createDriver(NewDriverDto entity) {
+    public DriverDto createDriver(NewDriverDto entity) throws DuplicatedException {
+        //Validation for duplicated name
+        var optional = this.driverRepository.findByName(entity.getName());
+        if (optional.isPresent()) throw new DuplicatedException("Name " + entity.getName() + " already registered");
+
         Driver driver = new Driver();
         driver.setName(entity.getName());
         driver.setAge(entity.getAge());
