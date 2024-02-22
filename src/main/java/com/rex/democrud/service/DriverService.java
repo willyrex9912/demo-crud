@@ -2,7 +2,7 @@ package com.rex.democrud.service;
 
 import com.rex.democrud.dto.DriverDto;
 import com.rex.democrud.dto.NewDriverDto;
-import com.rex.democrud.service.exceptions.DriverNotFoundException;
+import com.rex.democrud.service.exceptions.EntityNotFoundException;
 
 import java.util.List;
 
@@ -12,6 +12,6 @@ public interface DriverService {
 
     List<DriverDto> findAll();
 
-    void deleteDriver(Long id) throws DriverNotFoundException;
+    void deleteDriver(Long id) throws EntityNotFoundException;
 
 }
