@@ -4,7 +4,7 @@ import com.rex.democrud.dto.DriverDto;
 import com.rex.democrud.dto.NewDriverDto;
 import com.rex.democrud.model.entities.drivers.Driver;
 import com.rex.democrud.repositories.DriverRepository;
-import com.rex.democrud.service.exceptions.EntityNotFoundException;
+import com.rex.democrud.service.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,9 +38,9 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public void deleteDriver(Long id) throws EntityNotFoundException {
+    public void deleteDriver(Long id) throws NotFoundException {
         var driver = this.driverRepository.findById(id);
-        if (driver.isEmpty()) throw new EntityNotFoundException("Entity " + id + " not found");
+        if (driver.isEmpty()) throw new NotFoundException("Entity " + id + " not found");
         this.driverRepository.deleteById(id);
     }
 }
