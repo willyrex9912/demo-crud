@@ -1,0 +1,26 @@
+###
+DELETE {{url_base}}/v1/drivers/10005
+
+###
+PUT {{url_base}}/v1/drivers
+Content-Type: application/json
+
+{
+  "id" : 10016,
+  "name": "Usuario 10016",
+  "age": 16
+}
+
+###
+POST {{url_base}}/v1/drivers
+Content-Type: application/json
+
+{
+  "name": "Usuario 2",
+  "age": 15
+}
+
+###
+GET {{url_base}}/v1/drivers
+Accept: application/json
+
