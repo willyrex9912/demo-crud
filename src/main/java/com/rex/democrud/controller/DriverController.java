@@ -6,6 +6,7 @@ import com.rex.democrud.model.entities.drivers.Driver;
 import com.rex.democrud.service.DriverService;
 import com.rex.democrud.service.exceptions.DuplicatedException;
 import com.rex.democrud.service.exceptions.NotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class DriverController {
     }
 
     @PostMapping("")
-    public ResponseEntity<DriverDto> create(@RequestBody NewDriverDto entity) throws DuplicatedException {
+    public ResponseEntity<DriverDto> create(@Valid @RequestBody NewDriverDto entity) throws DuplicatedException {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(this.driverService.createDriver(entity))
