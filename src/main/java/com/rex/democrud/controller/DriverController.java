@@ -2,6 +2,7 @@ package com.rex.democrud.controller;
 
 import com.rex.democrud.dto.DriverDto;
 import com.rex.democrud.dto.NewDriverDto;
+import com.rex.democrud.dto.UpdateDriverDto;
 import com.rex.democrud.model.entities.drivers.Driver;
 import com.rex.democrud.service.DriverService;
 import com.rex.democrud.service.exceptions.DuplicatedException;
@@ -34,7 +35,7 @@ public class DriverController {
     }
 
     @PutMapping("")
-    public ResponseEntity<DriverDto> update(@RequestBody Driver entity) throws NotFoundException {
+    public ResponseEntity<DriverDto> update(@RequestBody UpdateDriverDto entity) throws NotFoundException {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(this.driverService.updateDriver(entity))

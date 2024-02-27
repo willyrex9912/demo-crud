@@ -2,6 +2,7 @@ package com.rex.democrud.service;
 
 import com.rex.democrud.dto.DriverDto;
 import com.rex.democrud.dto.NewDriverDto;
+import com.rex.democrud.dto.UpdateDriverDto;
 import com.rex.democrud.model.entities.drivers.Driver;
 import com.rex.democrud.repositories.DriverRepository;
 import com.rex.democrud.service.exceptions.DuplicatedException;
@@ -35,7 +36,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public DriverDto updateDriver(Driver entity) throws NotFoundException {
+    public DriverDto updateDriver(UpdateDriverDto entity) throws NotFoundException {
         var optionalEntity = this.driverRepository.findById(entity.getId());
         if (optionalEntity.isEmpty()) throw new NotFoundException();
         Driver databaseEntity = optionalEntity.get();
