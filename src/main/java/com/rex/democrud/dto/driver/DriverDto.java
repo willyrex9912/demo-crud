@@ -1,4 +1,4 @@
-package com.rex.democrud.dto;
+package com.rex.democrud.dto.driver;
 
 import com.rex.democrud.model.entities.drivers.Driver;
 import lombok.Value;

@@ -1,8 +1,8 @@
 package com.rex.democrud.controller;
 
-import com.rex.democrud.dto.DriverDto;
-import com.rex.democrud.dto.NewDriverDto;
-import com.rex.democrud.dto.UpdateDriverDto;
+import com.rex.democrud.dto.driver.DriverDto;
+import com.rex.democrud.dto.driver.NewDriverDto;
+import com.rex.democrud.dto.driver.UpdateDriverDto;
 import com.rex.democrud.service.DriverService;
 import com.rex.democrud.service.exceptions.DuplicatedException;
 import com.rex.democrud.service.exceptions.NotFoundException;

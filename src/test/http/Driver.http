@@ -6,9 +6,9 @@ PUT {{url_base}}/v1/drivers
 Content-Type: application/json
 
 {
-  "id" : 10023,
-  "name": "Usuario 2Kb",
-  "age": 20
+  "id" : 10024,
+  "name": "Usuario 4K",
+  "age": 25
 }
 
 ###
@@ -16,7 +16,7 @@ POST {{url_base}}/v1/drivers
 Content-Type: application/json
 
 {
-  "name": "Usuario 3K",
+  "name": "Usuario 4K",
   "age": 15
 }
 
