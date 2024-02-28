@@ -21,7 +21,7 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public DriverDto createDriver(NewDriverDto entity) throws DuplicatedException {
         //Validation for duplicated name
-        var optional = this.driverRepository.findByName(entity.getName());
+        var optional = this.driverRepository.findFirstByName(entity.getName());
         if (optional.isPresent()) throw new DuplicatedException("Name " + entity.getName() + " already registered");
 
         Driver driver = new Driver();
@@ -36,10 +36,8 @@ public class DriverServiceImpl implements DriverService {
         Driver databaseEntity = this.driverRepository.findById(entity.getId()).orElseThrow(NotFoundException::new);
 
         //Validation for duplicated name
-        var optional = this.driverRepository.findByName(entity.getName());
-        if (optional.isPresent()) {
-            if(!optional.get().getId().equals(entity.getId())) throw new DuplicatedException("Name " + entity.getName() + " already registered");
-        }
+        var optional = this.driverRepository.findFirstByNameAndIdNot(entity.getName(), entity.getId());
+        if (optional.isPresent()) throw new DuplicatedException("Name " + entity.getName() + " already registered");
 
         databaseEntity.setName(entity.getName());
         databaseEntity.setAge(entity.getAge());

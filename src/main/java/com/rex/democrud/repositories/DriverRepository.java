@@ -12,6 +12,8 @@ public interface DriverRepository extends CrudRepository<Driver, Long> {
 
     List<Driver> findAll();
 
-    Optional<Driver> findByName(String name);
+    Optional<Driver> findFirstByName(String name);
+
+    Optional<Driver> findFirstByNameAndIdNot(String name, Long id);
 
 }
