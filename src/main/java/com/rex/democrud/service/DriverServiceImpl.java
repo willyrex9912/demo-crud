@@ -33,16 +33,14 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public DriverDto updateDriver(UpdateDriverDto entity) throws NotFoundException, DuplicatedException {
-        var optionalEntity = this.driverRepository.findById(entity.getId());
-        if (optionalEntity.isEmpty()) throw new NotFoundException();
+        Driver databaseEntity = this.driverRepository.findById(entity.getId()).orElseThrow(NotFoundException::new);
 
         //Validation for duplicated name
         var optional = this.driverRepository.findByName(entity.getName());
         if (optional.isPresent()) {
             if(!optional.get().getId().equals(entity.getId())) throw new DuplicatedException("Name " + entity.getName() + " already registered");
-        };
+        }
 
-        Driver databaseEntity = optionalEntity.get();
         databaseEntity.setName(entity.getName());
         databaseEntity.setAge(entity.getAge());
         return new DriverDto(this.driverRepository.save(databaseEntity));
