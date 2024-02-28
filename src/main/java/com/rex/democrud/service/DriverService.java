@@ -13,7 +13,7 @@ public interface DriverService {
 
     DriverDto createDriver(NewDriverDto entity) throws DuplicatedException;
 
-    DriverDto updateDriver(UpdateDriverDto entity) throws NotFoundException;
+    DriverDto updateDriver(UpdateDriverDto entity) throws NotFoundException, DuplicatedException;
 
     List<DriverDto> findAll();
 

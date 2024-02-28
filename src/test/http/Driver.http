@@ -1,13 +1,13 @@
 ###
-DELETE {{url_base}}/v1/drivers/10005
+DELETE {{url_base}}/v1/drivers/10020
 
 ###
 PUT {{url_base}}/v1/drivers
 Content-Type: application/json
 
 {
-  "id" : 10020,
-  "name": "Usuario 10020",
+  "id" : 10023,
+  "name": "Usuario 2K",
   "age": 20
 }
 
@@ -16,7 +16,7 @@ POST {{url_base}}/v1/drivers
 Content-Type: application/json
 
 {
-  "name": "Usuario 2",
+  "name": "Usuario 3K",
   "age": 15
 }
 

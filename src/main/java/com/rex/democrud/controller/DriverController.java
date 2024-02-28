@@ -3,12 +3,11 @@ package com.rex.democrud.controller;
 import com.rex.democrud.dto.DriverDto;
 import com.rex.democrud.dto.NewDriverDto;
 import com.rex.democrud.dto.UpdateDriverDto;
-import com.rex.democrud.model.entities.drivers.Driver;
 import com.rex.democrud.service.DriverService;
 import com.rex.democrud.service.exceptions.DuplicatedException;
 import com.rex.democrud.service.exceptions.NotFoundException;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,14 +16,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/drivers")
+@RequiredArgsConstructor
 public class DriverController {
 
     private final DriverService driverService;
-
-    @Autowired
-    public DriverController(DriverService driverService) {
-        this.driverService = driverService;
-    }
 
     @PostMapping("")
     public ResponseEntity<DriverDto> create(@Valid @RequestBody NewDriverDto entity) throws DuplicatedException {
@@ -35,7 +30,7 @@ public class DriverController {
     }
 
     @PutMapping("")
-    public ResponseEntity<DriverDto> update(@RequestBody UpdateDriverDto entity) throws NotFoundException {
+    public ResponseEntity<DriverDto> update(@RequestBody UpdateDriverDto entity) throws NotFoundException, DuplicatedException {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(this.driverService.updateDriver(entity))

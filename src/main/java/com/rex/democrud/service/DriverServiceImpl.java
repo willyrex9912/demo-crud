@@ -7,20 +7,16 @@ import com.rex.democrud.model.entities.drivers.Driver;
 import com.rex.democrud.repositories.DriverRepository;
 import com.rex.democrud.service.exceptions.DuplicatedException;
 import com.rex.democrud.service.exceptions.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class DriverServiceImpl implements DriverService {
 
     private final DriverRepository driverRepository;
-
-    @Autowired
-    public DriverServiceImpl(DriverRepository driverRepository) {
-        this.driverRepository = driverRepository;
-    }
 
     @Override
     public DriverDto createDriver(NewDriverDto entity) throws DuplicatedException {
@@ -36,9 +32,16 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public DriverDto updateDriver(UpdateDriverDto entity) throws NotFoundException {
+    public DriverDto updateDriver(UpdateDriverDto entity) throws NotFoundException, DuplicatedException {
         var optionalEntity = this.driverRepository.findById(entity.getId());
         if (optionalEntity.isEmpty()) throw new NotFoundException();
+
+        //Validation for duplicated name
+        var optional = this.driverRepository.findByName(entity.getName());
+        if (optional.isPresent()) {
+            if(!optional.get().getId().equals(entity.getId())) throw new DuplicatedException("Name " + entity.getName() + " already registered");
+        };
+
         Driver databaseEntity = optionalEntity.get();
         databaseEntity.setName(entity.getName());
         databaseEntity.setAge(entity.getAge());
